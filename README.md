@@ -1,2 +1,2 @@
 # hello-world
-learning git
+Silzi here, i like chicken tortillas.
