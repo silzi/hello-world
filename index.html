@@ -1,0 +1,361 @@
+﻿
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>EzVIP</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	
+
+    <!-- Custom CSS -->
+    <link href="css/grayscale.css" rel="stylesheet">
+	
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+	<link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<script src="listbox.php"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+
+<!-- TIETOKANTAYHTEYS -->
+<?php
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(-1);
+
+	$serveri="mysql.cc.puv.fi";
+	$kayttaja="e1300781";
+	$salasana="BxNjeFvqqhBg";
+	$tietokanta="e1300781_EZVIP";
+	// Avataan yhteys tietokantaan
+	$yhteys=mysqli_connect($serveri, $kayttaja, $salasana, $tietokanta);
+	// Onnistuiko yhteyden ottaminen?
+	if (mysqli_connect_errno())
+	{
+		die("Tietokantaan ei saada yhteyttä " .
+			mysqli_connect_error() .
+			"Virhekoodi: " . mysqli_connect_errno() 
+		);
+	}
+	$ravintola = mysqli_query($yhteys, "SELECT * FROM Ravintola" );
+	if (!$ravintola) 
+	{
+	die("Kysely epäonnistui") .
+			mysqli_connect_error() .
+			"Virhekoodi: " . mysqli_connect_errno() ;
+	}
+
+?>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">
+                       EzVIP
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#page-top">Etusivu</a>
+                    </li>
+                    <li>
+                        <a href="#"onClick="window.open('kirjautuminen.html', 'newwindow', 'width=425 height=500'); return false");>KIRJAUDU</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#laskuri">Laskuri</a>
+                    </li>
+					 <li>
+                        <a class="page-scroll" href="#contact">Yhteystiedot</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 ">
+                        <h1 class="brand-heading">EzVIP</h1>
+                        <p class="intro-text">Työkalu joka tekee sinusta VIPin helposti ja hauskasti<br>Created by Start Bootstrap.</p>
+                        <a href="#laskuri" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+	<br>
+	    <!-- Page Content -->
+    <div class="container col-md-offset-3">
+
+        <div class="row">
+
+             <div class="dropdown col-md-2 col-md-offset-">
+				<button class="btn btn-city dropdown-toggle" type="button" data-toggle="dropdown">Vaasa
+				<span class="caret"></span></button>
+				<ul class="dropdown-menu">
+				<li><a href="#">Fontana</a></li>
+				<li><a href="#">Sky</a></li>
+				<li><a href="#">Hullu Pullo</a></li>
+				</ul>
+			</div>
+			
+			<div class="dropdown col-md-2 ">
+				<button class="btn btn-city dropdown-toggle" type="button" data-toggle="dropdown">Seinäjoki
+				<span class="caret"></span></button>
+				<ul class="dropdown-menu">
+				<li><a href="#">Karma</a></li>
+				<li><a href="#">Ilona</a></li>
+				<li><a href="#">Sorsanpesä</a></li>
+				</ul>
+			</div>
+			
+			<div class="dropdown col-md-2">
+				<button class="btn btn-city dropdown-toggle" type="button" data-toggle="dropdown">Tampere
+				<span class="caret"></span></button>
+				<ul class="dropdown-menu">
+				<li><a href="#">Ilves</a></li>
+				<li><a href="#">Miami</a></li>
+				<li><a href="#">Fatlady</a></li>
+				</ul>
+			</div>
+			
+			<div class="dropdown col-md-2">
+				<button class="btn btn-city dropdown-toggle" type="button" data-toggle="dropdown">Kokkola
+				<span class="caret"></span></button>
+				<ul class="dropdown-menu">
+				<li><a href="#">Ilves</a></li>
+				<li><a href="#">Miami</a></li>
+				<li><a href="#">Fatlady</a></li>
+				</ul>
+			</div>
+		
+			
+		
+			
+
+            <div class="sivu col-md-9">
+<br>
+                
+                    <img class="img-responsive" src="http://placehold.it/900x500" alt="">
+                    
+                        <br><br>
+                        
+                        <p>INFOTEKSTIÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ<br> Linkki sivuille<a target="_blank" href="http://bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                        
+                        
+                    </div>
+                </div>
+				</div
+
+    <!-- LASKURI -->
+	  <section id="laskuri">
+        <div id="laskuri" class="bg-1">
+  <div class="container">
+      <h2>Laskuri <small>Tässä valitset itsellesi halutut tuotteet ja palvelut</small></h2>
+      <hr/>
+	  <h3>RAVINTOLA</h3>
+	<div class="btn-group col-md-2">
+    <button type="button" class="form-control btn btn-default dropdown-toggle" data-toggle="dropdown">
+        Valitse ravintola<span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="#laskuri">ravintola1</a></li>
+        <li><a href="#laskuri">ravintola2</a></li>
+        <li><a href="#laskuri">ravintola3</a></li>
+    </ul>
+	<br><br><br>
+
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
+
+
+<!--Form Container--> 
+ 
+<div class="form">
+  <form>
+    <div class="range1">
+    <label for="range" class="label">Miedot juomat</label>
+    <input type="range" name="range" min="0" max="99" step="1" value="1000">
+    <output for="range" class="output"></output>
+    </div>
+    <div class="range2">
+    <label for="range" class="label">Sisäänpääsymaksut</label>
+    <input type="range" name="range1" min="0" max="99" step="1" value="1000">
+    <output for="range1" class="output2"></output>
+    </div>
+    <div class="range3">
+    <label for="range" class="label">Pöytävaraukset</label>
+    <input type="range" name="range2" min="0" max="99" step="1" value="1500">
+    <output for="range2" class="output3"></output>
+    </div>
+  </form>
+ 
+
+
+
+
+
+<!-- Yhteys on otettu ja voidaan aloittaa tiedon haku listalaatikkoon -->
+Kurssikoodit
+<br>
+<select class="selectpicker">
+<?php
+	while ($rivi = mysqli_fetch_array($ravintola)) {
+?>
+		<option id ="ValittuRavintola">
+			<?php
+				echo $rivi['Nimi'];
+			?>
+		</option>
+
+<?php
+} // while-toisto päättyy tähän, tiedot on luettu
+?>
+
+
+
+</select>
+<br><br>
+
+<?php
+    mysqli_free_result ($ravintola);
+	mysqli_close($yhteys);
+?>
+
+
+
+
+
+
+ 
+
+</div>
+
+     
+
+    </div>
+            </div>
+        </div>
+    </section>
+	
+	
+
+
+
+
+
+     <!-- Contact Section -->
+    <section id="contact">
+        <div id="contact" class="bg-1">
+		<hr/>
+  <h3 class="text-center">Yhteystiedot</h3>
+  
+  
+
+  <div class="row">
+    <div class="col-md-4 col-md-offset-2">
+      <h4>Yhteystiedot</h4>
+      <h4><span class="glyphicon glyphicon-map-marker"></span>Vaasa, FI</h4>
+      <h4><span class="glyphicon glyphicon-phone"></span>Puhelin: 0407231411</h4>
+      <h4><span class="glyphicon glyphicon-envelope"></span>Sähköposti: ezvip@mail.com</h4>	   
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6 form-group col-md-offset-2" >
+          <input class="form-control" id="name" name="name" placeholder="NIMI" type="text" required>
+        </div>
+		
+        <div class="col-md-6 form-group col-md-offset-2">
+          <input class="form-control" id="email" name="email" placeholder="SÄHKÖPOSTI" type="email" required>
+        </div>
+      <div class="col-md-6 form-group col-md-offset-2">
+          <textarea class="col-md-8 form-control" id="comments" name="comments" placeholder="VIESTI" rows="5"></textarea>
+        </div>
+      <br>
+	  <div class="row">
+	  <div class="col-md-5">
+	  
+	  </div>
+       <div class="col-md-6 col-md-offset-4 ">
+      <div class="row">
+	  <br>
+        <button class="btn-city " type="submit">LÄHETÄ</button>
+        </div>
+          
+		  </footer>
+
+        </div>
+      </div>	
+    </div>
+	    </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>EzVIP design</p>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script>
+
+</body>
+
+</html>
